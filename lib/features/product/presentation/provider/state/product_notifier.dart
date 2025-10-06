@@ -25,6 +25,7 @@ class ProductNotifier extends StateNotifier<ProductState> {
           state = state.copyWith(
             state: ProductConcreteState.loaded,
             products: data.products,
+            searchListproducts: data.products,
             hasData: true,
             isLoading: false,
           );
@@ -38,5 +39,23 @@ class ProductNotifier extends StateNotifier<ProductState> {
         }
       },
     );
+  }
+
+  void searchProducts(String query) {
+    if (query.isNotEmpty) {
+      final filteredProducts = (state.products).where((product) {
+        final title = product.title?.toLowerCase() ?? '';
+        final searchQuery = query.toLowerCase();
+        return title.contains(searchQuery);
+      }).toList();
+
+      state = state.copyWith(searchListproducts: filteredProducts);
+    } else {
+      state = state.copyWith(
+        products: state.products,
+        searchListproducts: state.products,
+        hasData: true,
+      );
+    }
   }
 }

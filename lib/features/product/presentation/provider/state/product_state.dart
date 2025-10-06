@@ -5,6 +5,7 @@ enum ProductConcreteState { initial, loading, loaded, failure }
 
 class ProductState extends Equatable {
   final List<Product> products;
+  final List<Product> searchListproducts;
   final bool hasData;
   final String message;
   final ProductConcreteState state;
@@ -12,6 +13,7 @@ class ProductState extends Equatable {
 
   const ProductState({
     this.products = const [],
+    this.searchListproducts = const [],
     this.hasData = false,
     this.message = '',
     this.state = ProductConcreteState.initial,
@@ -20,6 +22,7 @@ class ProductState extends Equatable {
 
   const ProductState.initial({
     this.products = const [],
+    this.searchListproducts = const [],
     this.hasData = false,
     this.message = '',
     this.state = ProductConcreteState.initial,
@@ -28,6 +31,7 @@ class ProductState extends Equatable {
 
   ProductState copyWith({
     List<Product>? products,
+    List<Product>? searchListproducts,
     bool? hasData,
     String? message,
     ProductConcreteState? state,
@@ -35,6 +39,7 @@ class ProductState extends Equatable {
   }) {
     return ProductState(
       products: products ?? this.products,
+      searchListproducts: searchListproducts ?? this.searchListproducts,
       message: message ?? this.message,
       hasData: hasData ?? this.hasData,
       state: state ?? this.state,
@@ -43,5 +48,12 @@ class ProductState extends Equatable {
   }
 
   @override
-  List<Object?> get props => [products, hasData, message, state, isLoading];
+  List<Object?> get props => [
+    products,
+    searchListproducts,
+    hasData,
+    message,
+    state,
+    isLoading,
+  ];
 }
